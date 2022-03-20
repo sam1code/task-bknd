@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  node-server:
+    image: node-server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    links:
+      - mongo
+    ports:
+      - 8000:5000
+    restart: always
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - .:/mongovol
+
+volumes:
+  mongovol: {}
